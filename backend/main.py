@@ -15,7 +15,7 @@ keys_env = os.getenv("GEMINI_API_KEYS", "")
 API_KEYS = [k.strip() for k in keys_env.split(",") if k.strip()]
 
 if not API_KEYS:
-    API_KEYS = ["dummy_key"] # Fallback dummy key so app doesn't crash on startup
+    API_KEYS = ["dummy_key"]  # Fallback dummy key so app doesn't crash on startup
 
 key_iterator = itertools.cycle(API_KEYS)
 
@@ -62,12 +62,12 @@ async def analyze_document(file: UploadFile = File(...)):
 
     response_text = None
     
-    # Try actual API generation first
+    # Try actual API generation first using correct gemini-2.5-flash model
     for i in range(len(API_KEYS)):
         try:
             client = get_gemini_client()
             response = client.models.generate_content(
-                model='gemini-3.8-flash',
+                model='gemini-2.5-flash',
                 contents=prompt,
             )
             if response and response.text:
@@ -77,7 +77,7 @@ async def analyze_document(file: UploadFile = File(...)):
             print(f"Key attempt {i+1} failed: {str(e)}")
             continue
 
-    # Fallback Mock Response if Quota is Exhausted (Ensures app never breaks during demo)
+    # Fallback Mock Response if Quota is Exhausted
     if not response_text:
         print("⚠️ API Quota exhausted or unavailable. Serving smart fallback study data for demo/testing.")
         fallback_data = {
@@ -106,17 +106,6 @@ async def analyze_document(file: UploadFile = File(...)):
                     ],
                     "answer": "Systematic analysis and workflows",
                     "explanation": "Operational workflows and systematic analysis form the backbone of the material."
-                },
-                {
-                    "question": "How are the fundamental principles categorized in the document?",
-                    "options": [
-                        "Through structured definitions and foundational theories",
-                        "By arbitrary guessing",
-                        "Through fictional storytelling",
-                        "Unstructured raw data"
-                    ],
-                    "answer": "Through structured definitions and foundational theories",
-                    "explanation": "Fundamental principles are systematically categorized using structured definitions."
                 }
             ]
         }
@@ -147,11 +136,7 @@ async def analyze_document(file: UploadFile = File(...)):
 @app.post("/chat-doc/")
 async def chat_document(req: ChatRequest):
     prompt = f"""
-    You are an expert AI study assistant. Based on the following document context, answer the user's question clearly and concisely.
-    IMPORTANT FORMATTING RULES:
-    - Do NOT use markdown headers (like #, ##).
-    - Do NOT use markdown asterisks for bolding or italics (like **, *).
-    - Provide the response in clean, readable plain text paragraphs or simple dash (-) bullet points only.
+    You are an expert AI study assistant. Based on the following document context, answer the user's question clearly and concisely based strictly on the text.
     
     Document Context:
     {req.text[:15000]}
@@ -163,7 +148,7 @@ async def chat_document(req: ChatRequest):
         try:
             client = get_gemini_client()
             response = client.models.generate_content(
-                model='gemini-3.8-flash',
+                model='gemini-2.5-flash',
                 contents=prompt
             )
             if response and response.text:
