@@ -90,7 +90,7 @@ export default function Home() {
     formData.append('file', file);
 
     try {
-      const res = await fetch('https://studysync-backend-a3zj.onrender.com', {
+      const res = await fetch('https://studysync-backend-a3zj.onrender.com/analyze-doc/', {
         method: 'POST',
         body: formData,
       });
@@ -118,7 +118,7 @@ export default function Home() {
     setChatLoading(true);
 
     try {
-      const res = await fetch('http://127.0.0.1:8000/chat-doc/', {
+      const res = await fetch('https://studysync-backend-a3zj.onrender.com/chat-doc/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ text: result.extracted_text, question: userQuestion }),
