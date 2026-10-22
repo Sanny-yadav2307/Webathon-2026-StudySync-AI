@@ -90,7 +90,7 @@ export default function Home() {
     formData.append('file', file);
 
     try {
-      const res = await fetch('http://127.0.0.1:8000/analyze-doc/', {
+      const res = await fetch('https://studysync-backend-a3zj.onrender.com', {
         method: 'POST',
         body: formData,
       });
