@@ -1,6 +1,6 @@
 # 🧠 StudySync AI (Webathon 2026)
 
-Transform your study materials into smart summaries, interactive quizzes, instant chat, and study notes powered by Google Gemini AI. Built for WebNova / Webathon 2026.
+Transform your study materials into smart summaries, interactive quizzes, instant chat, and study notes powered by Google Gemini AI. Built for Webathon 2026.
 
 ## 🚀 Live Links
 * **Frontend (Vercel):** [https://webathon-2026-study-sync-ai.vercel.app](https://webathon-2026-study-sync-ai.vercel.app)
