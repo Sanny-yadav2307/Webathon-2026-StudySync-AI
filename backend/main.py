@@ -67,7 +67,7 @@ async def analyze_document(file: UploadFile = File(...)):
         try:
             client = get_gemini_client()
             response = client.models.generate_content(
-                model='gemini-2.5-flash',
+                model='gemini-1.5-flash',
                 contents=prompt,
             )
             if response and response.text:
@@ -148,7 +148,7 @@ async def chat_document(req: ChatRequest):
         try:
             client = get_gemini_client()
             response = client.models.generate_content(
-                model='gemini-2.5-flash',
+                model='gemini-1.5-flash',
                 contents=prompt
             )
             if response and response.text:
