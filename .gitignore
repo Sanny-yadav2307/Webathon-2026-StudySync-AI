@@ -1,0 +1,13 @@
+# Frontend ignores
+frontend/node_modules/
+frontend/.next/
+frontend/.env*
+
+# Backend ignores
+backend/__pycache__/
+backend/.env
+backend/venv/
+
+# General OS files
+.DS_Store
+*.log
