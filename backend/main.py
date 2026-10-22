@@ -62,12 +62,12 @@ async def analyze_document(file: UploadFile = File(...)):
 
     response_text = None
     
-    # Try actual API generation first using correct gemini-2.5-flash model
+    # Try actual API generation first using correct gemini-3.8-flash model
     for i in range(len(API_KEYS)):
         try:
             client = get_gemini_client()
             response = client.models.generate_content(
-                model='gemini-1.5-flash',
+                model='gemini-3.8-flash',
                 contents=prompt,
             )
             if response and response.text:
@@ -148,7 +148,7 @@ async def chat_document(req: ChatRequest):
         try:
             client = get_gemini_client()
             response = client.models.generate_content(
-                model='gemini-1.5-flash',
+                model='gemini-3.8-flash',
                 contents=prompt
             )
             if response and response.text:
