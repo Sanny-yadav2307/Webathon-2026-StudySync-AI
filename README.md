@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # 🧠 StudySync AI
 
 Transform your study materials into smart summaries, interactive quizzes, and instant document chat for WebNova 2026.
